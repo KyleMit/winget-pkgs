@@ -1,0 +1,84 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+
+    "title": "Windows Package Manager Manifest",
+    "description": "See https://docs.microsoft.com/en-us/windows/package-manager/package/manifest?tabs=minschema%2Ccompschema & https://github.com/microsoft/winget-cli/blob/master/doc/ManifestSpecv0.1.md",
+
+    "type": "object",
+    "properties": {
+
+        "Id": {
+            "type": "string"
+        },
+        "Name": {
+            "type": "string"
+        },
+        "Publisher": {
+            "type": "string"
+        },
+        "AppMoniker": {
+            "type": "string"
+        },
+        "Version": {
+            "type": "string"
+        },
+        "Author": {
+            "type": "string"
+        },
+        "License": {
+            "type": "string"
+        },
+        "LicenseUrl": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^(https?|wss?|ftp)://"
+        },
+        "MinOSVersion": {
+            "type": "string"
+        },
+        "Homepage": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^(https?|wss?|ftp)://"
+        },
+        "Description": {
+            "type": "string"
+        },
+        "Tags": {
+            "type": "string"
+        },
+        "InstallerType": {
+            "type": "string"
+        },
+        "Installers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "Arch": {
+                        "type": "string"
+                    },
+                    "Url": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^(https?|wss?|ftp)://"
+                    },
+                    "InstallerType": {
+                        "type": "string"
+                    },
+                    "Sha256": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+
+    },
+    "required": [
+        "Id",
+        "Name",
+        "Publisher",
+        "Version",
+        "Installers"
+    ]
+}

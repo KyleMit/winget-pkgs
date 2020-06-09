@@ -26,7 +26,7 @@ Id: string # publisher.package format
 Publisher: string # the name of the publisher
 Name: string # the name of the application
 Version: string # version numbering format
-License: string # the open source license or copyright
+License: string # the open source license or copy
 InstallerType: string # enumeration of supported installer types (exe, msi, msix)
 Installers:
   - Arch: string # enumeration of supported architectures
