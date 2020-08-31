@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+      "Tools/manifest.schema.json": "manifests/**/*.yaml"
+    }
+}

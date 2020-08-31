@@ -1,0 +1,204 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+
+    "title": "Windows Package Manager Manifest",
+    "description": "See https://docs.microsoft.com/en-us/windows/package-manager/package/manifest?tabs=minschema%2Ccompschema & https://github.com/microsoft/winget-cli/blob/master/doc/ManifestSpecv0.1.md",
+
+    "type": "object",
+    "properties": {
+
+        "Id": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 255,
+            "pattern": "^\\S*$",
+            "title": "Publisher.package format.",
+            "description": "Id is a required field.  It MUST include the publisher name and application name separated by a period.  The Id convention and folder convention MUST match.  Therefore all entries MUST look like this: `PublisherName.ApplicationName` and the folder structure `PublisherName\\ApplicationName\\ApplicationName-Version.YAML`",
+            "examples": ["microsoft.msixsdk"]
+        },
+        "Publisher": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "title": "The name of the publisher.",
+            "description": "Publisher is a required field.  It should be the legal company name.",
+            "examples": ["Microsoft"]
+
+        },
+        "Name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "title": "The name of the application.",
+            "description": "Name is a required field.  It should be the friendly name of the application.",
+            "examples": ["MSIX SDK"]
+        },
+        "AppMoniker": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40,
+            "pattern": "^\\S*$",
+            "title": "The common name someone may use to search for the package.",
+            "description": "AppMoniker is the common name someone may use to search for the application.",
+            "examples": ["msixsdk"]
+        },
+        "Version": {
+            "type": "string",
+            "title": "Version numbering format for package version.",
+            "description": "Version is a required field.  It is the specific version of this copy of the application. Versions should be separated by a period, but we will support other delimiters. Versions should be limited to four fields: Major.Minor.Build.Update. Versions will be sorted as integers following the following pattern: Major.Minor.Build.Patch."
+        },
+        "Channel": {
+            "type": "string",
+            "title": "A string representing the flight ring."
+        },
+        "License": {
+            "type": "string",
+            "title": "The open source license or copyright."
+        },
+        "LicenseUrl": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^(https?|wss?|ftp)://",
+            "title": "Valid secure URL to license."
+        },
+        "MinOSVersion": {
+            "type": "string",
+            "title": "Version numbering format for minimum version of Windows supported."
+        },
+        "title": {
+            "type": "string",
+            "title": "Description of the package."
+        },
+        "Homepage": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^(https?|wss?|ftp)://",
+            "title": "Valid secure URL for the package."
+        },
+        "Tags": {
+            "type": "array",
+            "items": { "type": "string" },
+            "title": "Additional strings a user would use to search for the package."
+        },
+        "FileExtensions": {
+            "type": "array",
+            "items": { "type": "string" },
+            "title": "List of file extensions the package could support."
+        },
+        "Protocols": {
+            "type": "array",
+            "items": { "type": "string" },
+            "title": "List of protocols the package provides a handler for."
+        },
+        "Commands": {
+            "type": "array",
+            "items": { "type": "string" },
+            "title": "List of commands or aliases the user would use to run the package."
+        },
+        "InstallerType": {
+            "type": "string",
+            "title": "Enumeration of supported installer types (exe, msi, msix, inno, wix, nullsoft, appx).",
+            "enum": ["exe", "msi", "msix", "inno", "wix", "nullsoft", "appx"]
+        },
+        "Custom": {
+            "type": "string",
+            "title": "Custom switches passed to the installer."
+        },
+        "Silent": {
+            "type": "string",
+            "title": "Switches passed to the installer for silent installation."
+        },
+        "SilentWithProgress": {
+            "type": "string",
+            "title": "Switches passed to the installer for non-interactive install."
+        },
+        "Interactive": {
+            "type": "string",
+            "title": "Experimental"
+        },
+        "Language": {
+            "type": "string",
+            "title": "Experimental"
+        },
+        "Log": {
+            "type": "string",
+            "title": "Specifies log redirection switches and path."
+        },
+        "InstallLocation": {
+            "type": "string",
+            "title": "Specifies alternate location to install package."
+        },
+        "Installers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "Arch": {
+                        "type": "string",
+                        "title": "Enumeration of supported architectures.",
+                    },
+                    "Url": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^(https?|wss?|ftp)://",
+                        "title": "Path to download installation file."
+                    },
+                    "Sha256": {
+                        "type": "string",
+                        "title": "SHA256 calculated from installer."
+                    },
+                    "SignatureSha256": {
+                        "type": "string",
+                        "title": "SHA256 calculated from signature file's hash of MSIX file"
+                    },
+                    "Switches": {
+                        "type": "string",
+                        "title": "SHA256 calculated from installer."
+                    },
+                    "Scope": {
+                        "type": "string",
+                        "title": "Experimental."
+                    },
+                    "SystemAppId": {
+                        "type": "string",
+                        "title": "Experimental."
+                    }
+                },
+                "required": [
+                    "Arch",
+                    "Url",
+                    "Sha256"
+                ]
+            },
+            "title": "Nested map of keys for specific installer."
+        },
+        "Localization": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "Language": {
+                        "type": "string",
+                        "title": "Locale for display fields and localized URLs."
+                    }
+                }
+            },
+            "title": "Nested map of keys for localization."
+        },
+        "ManifestVersion": {
+            "type": "string",
+            "title": "Version number format for manifest version."
+        }
+
+    },
+    "required": [
+        "Id",
+        "Publisher",
+        "Name",
+        "Version",
+        "License",
+        "InstallerType",
+        "Installers",
+        "ManifestVersion"
+    ]
+}
